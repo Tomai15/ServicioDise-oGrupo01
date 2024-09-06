@@ -1,4 +1,5 @@
 def encontrarComunidadesCercanas(self, direccion_dto):
+
     ubicacion_usuario = Ubicacion(location.latitude, location.longitude)
 
     # Calcular la distancia a cada ONG
