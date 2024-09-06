@@ -1,3 +1,5 @@
+#Devuelve las comunidadesCercanas
+
 class ComunidadesCercanasDTO:
     def __init__(self, comunidades):
         self.comunidades = comunidades
