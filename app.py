@@ -22,7 +22,7 @@ create_db()
 item_bp = Blueprint('item_bp', __name__)
 
 # Recibe un string y un número n y devuelve una lista de strings de longitud n
-@item_bp.route('/generate_list', methods=['POST'])
+@item_bp.route('/generate_list', methods=['GET'])
 def generate_list_view():
 
     controllerComunidades = ComunidadesController(EncontrarComunidadesCercanas())
@@ -46,7 +46,7 @@ def generate_list_view():
         return jsonify({'error': 'Error al generar la lista'}), 500
     else:
         # ubicaciones es el DTO que tiene la lista de ubicaciones de las comunidades
-        return jsonify({'Comunidades': comunidadesCercanasDTO}), 200
+        return jsonify(comunidadesCercanasDTO.to_dict()), 200
 
     """
     La vista llama al método generate_list del controlador, que devuelve una lista de objetos CustomItem 

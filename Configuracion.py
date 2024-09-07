@@ -1,5 +1,5 @@
 MYSQL_USER = 'root'
-MYSQL_PASSWORD = 'pokemon10'
+MYSQL_PASSWORD = '1109'
 MYSQL_DB = 'db_recomendadorongs'
 MYSQL_HOST = 'localhost'
 MYSQL_PORT = '3306'
