@@ -1,9 +1,11 @@
 from flask import Flask, Blueprint, request, jsonify
+from sqlalchemy.orm import query_expression
+
 import Configuracion
 from Controllers.ComunidadesController import ComunidadesController
 from DTOs.DireccionDTO import DireccionDTO
 from DTOs.NuevaComunidadDTO import NuevaComunidadDTO
-from Model.Ubicacion import Ubicacion
+
 from Services.EncontrarComunidadesCercanas import EncontrarComunidadesCercanas
 from database import db
 
@@ -22,7 +24,7 @@ create_db()
 item_bp = Blueprint('item_bp', __name__)
 
 # Recibe un string y un número n y devuelve una lista de strings de longitud n
-@item_bp.route('/generate_list', methods=['GET'])
+@item_bp.route('/encontrarComunidades', methods=['GET'])
 def generate_list_view():
 
     controllerComunidades = ComunidadesController(EncontrarComunidadesCercanas())
@@ -48,11 +50,8 @@ def generate_list_view():
         # ubicaciones es el DTO que tiene la lista de ubicaciones de las comunidades
         return jsonify(comunidadesCercanasDTO.to_dict()), 200
 
-    """
-    La vista llama al método generate_list del controlador, que devuelve una lista de objetos CustomItem 
-    y un código de estado HTTP (status_code).
-    """
-@item_bp.route('/agregar_comunidad', methods=['POST'])
+
+@item_bp.route('/agregarComunidad', methods=['POST'])
 def agregar_comunidad():
     controllerComunidades = ComunidadesController(EncontrarComunidadesCercanas())
 
@@ -68,7 +67,7 @@ def agregar_comunidad():
     nuevaComunidadDTO = NuevaComunidadDTO(nombre,direccion, latitud, longitud)
     controllerComunidades.crearComunidad(nuevaComunidadDTO)
 
-    return jsonify({'Estado': 'Salio todo joya'}), 200
+    return jsonify({'Estado': 'La comunidad se agrego correctamente'}), 200
 
 
 app.register_blueprint(item_bp)

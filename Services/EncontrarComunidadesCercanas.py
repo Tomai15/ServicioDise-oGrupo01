@@ -29,8 +29,13 @@ class EncontrarComunidadesCercanas:
             distancias.append((ong, distancia))
     """
         # Ordenar las ONGs por distancia
-        listaComunidades = Ong.Ong.get_all()
-        listaComunidades.sort(key=lambda ong: geodesic((ubicacion_usuario.latitud, ubicacion_usuario.longitud),(ong.ubicacion.latitud, ong.ubicacion.longitud)).kilometers)
+        listaComunidades.sort(
+                                key=lambda ong:
+                                geodesic((ubicacion_usuario.latitud, ubicacion_usuario.longitud),
+                                         (ong.ubicacion.latitud, ong.ubicacion.longitud)).
+                                kilometers
+
+                              )
 
         # Seleccionar las N ONGs más cercanas
         recomendadas = listaComunidades[:direccionDTO.getCantidad_recomendaciones()]
